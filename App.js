@@ -1,13 +1,23 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Image, Text, View, Button, Alert, TextInput } from 'react-native';
 
 export default function App() {
+
+  const [text, setText] = React.useState('');
+
+  const buttonPressed = () =>{
+    Alert.alert('You typed: ' + text);
+  }
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <Text>Hello world</Text>
-      <Text>Yay! It is working!</Text>
+      <Image style={{width:250, height:300}}
+             source={require('./img/tea.png')}/>
+      <Text style={styles.alerttext}>Hello world!</Text>
+      <TextInput style={{width:200, borderColor: 'gray', borderWidth:1}}
+      onChangeText={text => setText(text)}
+      value={text}/>
+      <Button onPress={buttonPressed} title="Press me"/>
       <StatusBar style="auto" />
     </View>
   );
@@ -19,5 +29,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  alerttext: {
+    fontSize: 18,
+    color: 'red'
   },
 });
